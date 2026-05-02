@@ -7,16 +7,22 @@ export function useRecipe() {
   const [mode, setMode] = useState<'original' | 'custom'>('original');
   const [volume, setVolume] = useState(0);
 
-  const updateIngredient = useCallback((ingredient: string, value: number) => {
-    const newIngredients = calculator.updateIngredient(ingredient, value);
-    setIngredients(newIngredients);
-    setVolume(calculator.calculateVolume());
-  }, [calculator]);
+  const updateIngredient = useCallback(
+    (ingredient: string, value: number) => {
+      const newIngredients = calculator.updateIngredient(ingredient, value);
+      setIngredients(newIngredients);
+      setVolume(calculator.calculateVolume());
+    },
+    [calculator]
+  );
 
-  const switchMode = useCallback((newMode: 'original' | 'custom') => {
-    calculator.setMode(newMode);
-    setMode(newMode);
-  }, [calculator]);
+  const switchMode = useCallback(
+    (newMode: 'original' | 'custom') => {
+      calculator.setMode(newMode);
+      setMode(newMode);
+    },
+    [calculator]
+  );
 
   const resetToOriginal = useCallback(() => {
     const originalIngredients = calculator.resetToOriginal();
@@ -28,9 +34,12 @@ export function useRecipe() {
     return calculator.exportRecipe();
   }, [calculator]);
 
-  const getProportionLabel = useCallback((ingredient: string) => {
-    return calculator.getProportionLabel(ingredient);
-  }, [calculator]);
+  const getProportionLabel = useCallback(
+    (ingredient: string) => {
+      return calculator.getProportionLabel(ingredient);
+    },
+    [calculator]
+  );
 
   useEffect(() => {
     setVolume(calculator.calculateVolume());
@@ -44,6 +53,6 @@ export function useRecipe() {
     switchMode,
     resetToOriginal,
     exportRecipe,
-    getProportionLabel
+    getProportionLabel,
   };
 }

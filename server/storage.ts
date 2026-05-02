@@ -1,5 +1,10 @@
-import { type User, type InsertUser, type GazpachoCounter, type InsertCounter } from "@shared/schema";
-import { randomUUID } from "crypto";
+import {
+  type User,
+  type InsertUser,
+  type GazpachoCounter,
+  type InsertCounter,
+} from '@shared/schema';
+import { randomUUID } from 'crypto';
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -27,9 +32,7 @@ export class MemStorage implements IStorage {
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    return Array.from(this.users.values()).find((user) => user.username === username);
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {

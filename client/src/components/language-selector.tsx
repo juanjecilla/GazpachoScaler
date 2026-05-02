@@ -13,14 +13,14 @@ const LANGUAGE_FLAGS = {
   en: '🇬🇧',
   es: '🇪🇸',
   fr: '🇫🇷',
-  de: '🇩🇪'
+  de: '🇩🇪',
 } as const;
 
 const LANGUAGE_NAMES = {
   en: 'English',
   es: 'Español',
   fr: 'Français',
-  de: 'Deutsch'
+  de: 'Deutsch',
 } as const;
 
 interface LanguageSelectorProps {
@@ -49,22 +49,23 @@ export function LanguageSelector({ onLanguageChange }: LanguageSelectorProps) {
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          size="icon"
-          className="rounded-full bg-parchment-100 dark:bg-ancient-800 border-parchment-400 dark:border-ancient-600 hover:bg-parchment-200 dark:hover:bg-ancient-700 shadow-lg"
+          size="sm"
+          className="gap-1 rounded-full border-parchment-400 bg-parchment-100 shadow-lg hover:bg-parchment-200 dark:border-ancient-600 dark:bg-ancient-800 dark:hover:bg-ancient-700"
           data-testid="language-selector-button"
         >
           <Globe className="h-4 w-4 text-ancient-700 dark:text-parchment-200" />
+          <span className="text-sm">{LANGUAGE_FLAGS[currentLanguage]}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent 
-        align="end" 
-        className="bg-parchment-100 dark:bg-ancient-800 border-parchment-400 dark:border-ancient-600"
+      <DropdownMenuContent
+        align="end"
+        className="border-parchment-400 bg-parchment-100 dark:border-ancient-600 dark:bg-ancient-800"
       >
         {Object.entries(LANGUAGE_FLAGS).map(([lang, flag]) => (
           <DropdownMenuItem
             key={lang}
             onClick={() => handleLanguageChange(lang as Language)}
-            className="text-ancient-700 dark:text-parchment-200 hover:bg-parchment-200 dark:hover:bg-ancient-700 cursor-pointer"
+            className="cursor-pointer text-ancient-700 hover:bg-parchment-200 dark:text-parchment-200 dark:hover:bg-ancient-700"
             data-testid={`language-option-${lang}`}
           >
             <span className="mr-2">{flag}</span>
