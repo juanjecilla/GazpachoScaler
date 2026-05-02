@@ -35,6 +35,7 @@ export const translations = {
     already_marked: "You've already marked this recipe as made!",
     reset_success: 'Recipe reset to original proportions',
     share_not_supported: 'Sharing not supported on this device',
+    print_recipe: 'Print Recipe',
   },
   es: {
     subtitle:
@@ -72,6 +73,7 @@ export const translations = {
     already_marked: '¡Ya has marcado que hiciste esta receta!',
     reset_success: 'Receta restaurada a proporciones originales',
     share_not_supported: 'Compartir no compatible en este dispositivo',
+    print_recipe: 'Imprimir Receta',
   },
   fr: {
     subtitle:
@@ -109,6 +111,7 @@ export const translations = {
     already_marked: 'Vous avez déjà marqué cette recette comme faite!',
     reset_success: 'Recette restaurée aux proportions originales',
     share_not_supported: 'Partage non pris en charge sur cet appareil',
+    print_recipe: 'Imprimer la Recette',
   },
   de: {
     subtitle:
@@ -146,6 +149,7 @@ export const translations = {
     already_marked: 'Sie haben dieses Rezept bereits als gemacht markiert!',
     reset_success: 'Rezept auf ursprüngliche Proportionen zurückgesetzt',
     share_not_supported: 'Teilen auf diesem Gerät nicht unterstützt',
+    print_recipe: 'Rezept Drucken',
   },
 };
 
