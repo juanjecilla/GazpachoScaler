@@ -31,9 +31,9 @@ export function ActionsPanel({ exportRecipe, t }: ActionsPanelProps) {
   }, []);
 
   // Fetch counter data
-  const { data: counterData } = useQuery({
+  const { data: counterData } = useQuery<{ count: number }>({
     queryKey: ['/api/gazpacho/counter'],
-    staleTime: 30000, // 30 seconds
+    staleTime: 30000,
   });
 
   // Increment counter mutation
