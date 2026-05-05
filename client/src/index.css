@@ -177,3 +177,34 @@
     background: linear-gradient(to right, var(--ancient-600), var(--ancient-700));
   }
 }
+
+@media print {
+  /* Hide interactive controls */
+  [data-testid='theme-toggle-button'],
+  [data-testid='language-selector-button'],
+  [data-testid='reset-recipe-button'],
+  [data-testid='export-recipe-button'],
+  [data-testid='copy-link-button'],
+  [data-testid='share-social-button'],
+  [data-testid='made-it-button'],
+  [data-testid='original-recipe-button'],
+  [data-testid='custom-recipe-button'] {
+    display: none !important;
+  }
+
+  /* Single column layout */
+  .lg\:grid-cols-3 {
+    display: block !important;
+  }
+
+  /* Clean card borders */
+  .shadow-xl,
+  .shadow-lg {
+    box-shadow: none !important;
+  }
+
+  body {
+    background: white !important;
+    background-image: none !important;
+  }
+}

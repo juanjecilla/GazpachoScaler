@@ -2,7 +2,17 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { useCounter } from '@/hooks/use-counter';
-import { Share2, Download, Link, Share, Users, Heart, CheckCircle, Lightbulb } from 'lucide-react';
+import {
+  Share2,
+  Download,
+  Link,
+  Share,
+  Users,
+  Heart,
+  CheckCircle,
+  Lightbulb,
+  Printer,
+} from 'lucide-react';
 
 interface RecipeExport {
   title: string;
@@ -134,6 +144,15 @@ export function ActionsPanel({ exportRecipe, t }: ActionsPanelProps) {
           >
             <Share className="mr-2 h-4 w-4" />
             {t('share_social')}
+          </Button>
+          <Button
+            onClick={() => window.print()}
+            variant="outline"
+            className="w-full transform border border-parchment-300 bg-parchment-200 text-ancient-700 shadow-md transition-all duration-200 hover:scale-105 hover:shadow-lg dark:border-ancient-600 dark:bg-ancient-700 dark:text-parchment-200"
+            data-testid="print-recipe-button"
+          >
+            <Printer className="mr-2 h-4 w-4" />
+            {t('print_recipe')}
           </Button>
         </CardContent>
       </Card>
