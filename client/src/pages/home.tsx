@@ -21,7 +21,7 @@ function ThemeToggle() {
       variant="outline"
       size="icon"
       onClick={toggleTheme}
-      className="rounded-full bg-parchment-100 dark:bg-ancient-800 border-parchment-400 dark:border-ancient-600 hover:bg-parchment-200 dark:hover:bg-ancient-700 shadow-lg"
+      className="rounded-full border-parchment-400 bg-parchment-100 shadow-lg hover:bg-parchment-200 dark:border-ancient-600 dark:bg-ancient-800 dark:hover:bg-ancient-700"
       data-testid="theme-toggle-button"
     >
       {theme === 'dark' ? (
@@ -43,45 +43,41 @@ function HomeContent() {
     switchMode,
     resetToOriginal,
     exportRecipe,
-    getProportionLabel
+    getProportionLabel,
   } = useRecipe();
 
-  const t = useCallback((key: string): string => {
-    return translations[currentLanguage]?.[key as keyof typeof translations.en] || key;
-  }, [currentLanguage]);
+  const t = useCallback(
+    (key: string): string => {
+      return translations[currentLanguage]?.[key as keyof typeof translations.en] || key;
+    },
+    [currentLanguage]
+  );
 
   const handleLanguageChange = useCallback((language: Language) => {
     setCurrentLanguage(language);
   }, []);
 
-  const showNotification = useCallback((message: string) => {
-    // This would be handled by the toast system in ActionsPanel
-    console.log('Notification:', message);
-  }, []);
-
   return (
-    <div className="min-h-screen transition-colors duration-300 bg-background">
+    <div className="min-h-screen bg-background transition-colors duration-300">
       {/* Theme and Language Controls */}
-      <div className="fixed top-4 right-4 z-50 flex gap-2">
+      <div className="fixed right-4 top-4 z-50 flex gap-2">
         <LanguageSelector onLanguageChange={handleLanguageChange} />
         <ThemeToggle />
       </div>
 
       {/* Header */}
-      <header className="text-center py-12 px-4">
-        <div className="max-w-4xl mx-auto">
+      <header className="px-4 py-12 text-center">
+        <div className="mx-auto max-w-4xl">
           <div className="relative">
-            <h1 className="font-playfair text-5xl md:text-7xl font-bold text-ancient-700 dark:text-parchment-100 mb-4">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-parchment-400 to-parchment-600">
+            <h1 className="mb-4 font-playfair text-5xl font-bold text-ancient-700 dark:text-parchment-100 md:text-7xl">
+              <span className="bg-gradient-to-r from-parchment-400 to-parchment-600 bg-clip-text text-transparent">
                 Juanje's
               </span>
               <br />
-              <span className="text-ancient-700 dark:text-parchment-100">
-                Golden Gazpacho
-              </span>
+              <span className="text-ancient-700 dark:text-parchment-100">Golden Gazpacho</span>
             </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-parchment-400 to-parchment-600 mx-auto rounded-full mb-4"></div>
-            <p className="font-crimson text-xl md:text-2xl text-ancient-600 dark:text-parchment-200 max-w-2xl mx-auto leading-relaxed">
+            <div className="mx-auto mb-4 h-1 w-24 rounded-full bg-gradient-to-r from-parchment-400 to-parchment-600"></div>
+            <p className="mx-auto max-w-2xl font-crimson text-xl leading-relaxed text-ancient-600 dark:text-parchment-200 md:text-2xl">
               {t('subtitle')}
             </p>
           </div>
@@ -89,17 +85,13 @@ function HomeContent() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 pb-12">
+      <main className="mx-auto max-w-6xl px-4 pb-12">
         {/* Recipe Mode Selector */}
         <div className="mb-8">
-          <RecipeModeSelector
-            mode={mode}
-            onModeChange={switchMode}
-            t={t}
-          />
+          <RecipeModeSelector mode={mode} onModeChange={switchMode} t={t} />
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid gap-8 lg:grid-cols-3">
           {/* Ingredients Calculator */}
           <div className="lg:col-span-2">
             <RecipeCalculator
@@ -114,10 +106,7 @@ function HomeContent() {
 
           {/* Actions Panel */}
           <div>
-            <ActionsPanel
-              exportRecipe={exportRecipe}
-              t={t}
-            />
+            <ActionsPanel exportRecipe={exportRecipe} t={t} />
           </div>
         </div>
       </main>
