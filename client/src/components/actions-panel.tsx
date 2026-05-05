@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { apiRequest } from '@/lib/queryClient';
+import { useCounter } from '@/hooks/use-counter';
 import { Share2, Download, Link, Share, Users, Heart, CheckCircle, Lightbulb } from 'lucide-react';
 
 interface RecipeExport {
@@ -21,41 +19,7 @@ interface ActionsPanelProps {
 
 export function ActionsPanel({ exportRecipe, t }: ActionsPanelProps) {
   const { toast } = useToast();
-  const queryClient = useQueryClient();
-  const [userHasMadeIt, setUserHasMadeIt] = useState(false);
-
-  // Check if user has already made it
-  useEffect(() => {
-    const hasMade = localStorage.getItem('gazpacho-user-made') === 'true';
-    setUserHasMadeIt(hasMade);
-  }, []);
-
-  // Fetch counter data
-  const { data: counterData } = useQuery<{ count: number }>({
-    queryKey: ['/api/gazpacho/counter'],
-    staleTime: 30000,
-  });
-
-  // Increment counter mutation
-  const incrementMutation = useMutation({
-    mutationFn: () => apiRequest('POST', '/api/gazpacho/counter/increment'),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/gazpacho/counter'] });
-      localStorage.setItem('gazpacho-user-made', 'true');
-      setUserHasMadeIt(true);
-      toast({
-        title: t('made_it_thanks'),
-        description: '',
-      });
-    },
-    onError: () => {
-      toast({
-        title: 'Error',
-        description: 'Failed to update counter',
-        variant: 'destructive',
-      });
-    },
-  });
+  const { count, increment, hasMade } = useCounter();
 
   const handleExportRecipe = () => {
     try {
@@ -120,8 +84,12 @@ export function ActionsPanel({ exportRecipe, t }: ActionsPanelProps) {
   };
 
   const handleMadeIt = () => {
-    if (!userHasMadeIt) {
-      incrementMutation.mutate();
+    if (!hasMade) {
+      increment();
+      toast({
+        title: t('made_it_thanks'),
+        description: '',
+      });
     } else {
       toast({
         title: t('already_marked'),
@@ -183,22 +151,22 @@ export function ActionsPanel({ exportRecipe, t }: ActionsPanelProps) {
             className="mb-2 text-4xl font-bold text-parchment-600 dark:text-parchment-300"
             data-testid="made-counter"
           >
-            {counterData?.count?.toLocaleString() || '2,847'}
+            {count.toLocaleString()}
           </div>
           <p className="font-inter mb-4 text-ancient-600 dark:text-parchment-200">
             {t('people_made')}
           </p>
           <Button
             onClick={handleMadeIt}
-            disabled={userHasMadeIt || incrementMutation.isPending}
+            disabled={hasMade}
             className={`font-inter w-full transform rounded-xl px-6 py-4 text-lg font-bold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-              userHasMadeIt
+              hasMade
                 ? 'cursor-not-allowed bg-gray-400 text-gray-600'
                 : 'bg-gradient-to-r from-parchment-500 to-parchment-600 text-white'
             }`}
             data-testid="made-it-button"
           >
-            {userHasMadeIt ? (
+            {hasMade ? (
               <>
                 <CheckCircle className="mr-2 h-5 w-5" />
                 {t('already_made')}
