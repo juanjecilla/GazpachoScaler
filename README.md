@@ -17,21 +17,21 @@ A recipe calculator for traditional Andalusian gazpacho. Scale ingredients propo
 
 ```bash
 node -v   # requires Node 20+
-npm ci
-npm run dev   # → http://localhost:5173
+pnpm install
+pnpm dev   # → http://localhost:5173
 ```
 
 ## Scripts
 
-| Command                 | Description                         |
-| ----------------------- | ----------------------------------- |
-| `npm run dev`           | Vite dev server                     |
-| `npm run build`         | TypeScript check + production build |
-| `npm run preview`       | Preview production build            |
-| `npm run lint`          | ESLint (0 warnings)                 |
-| `npm run format`        | Prettier format all files           |
-| `npm run test`          | Vitest test suite                   |
-| `npm run test:coverage` | Coverage report                     |
+| Command              | Description                         |
+| -------------------- | ----------------------------------- |
+| `pnpm dev`           | Vite dev server                     |
+| `pnpm build`         | TypeScript check + production build |
+| `pnpm preview`       | Preview production build            |
+| `pnpm lint`          | ESLint (0 warnings)                 |
+| `pnpm format`        | Prettier format all files           |
+| `pnpm test`          | Vitest test suite                   |
+| `pnpm test:coverage` | Coverage report                     |
 
 ## Tech stack
 

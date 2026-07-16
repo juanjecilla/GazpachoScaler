@@ -11,17 +11,17 @@ No backend. Counter is localStorage-only. See [docs/future-supabase-migration.md
 ## Commands
 
 ```bash
-npm run dev            # Vite dev server → localhost:5173
-npm run build          # tsc --noEmit + vite build (production)
-npm run preview        # preview production build → localhost:4173
-npm run lint           # ESLint — 0 warnings = CI gate
-npm run lint:fix       # ESLint with auto-fix
-npm run format         # Prettier format all files
-npm run format:check   # Prettier check (CI gate)
-npm run check          # tsc --noEmit
-npm run test           # Vitest single pass
-npm run test:watch     # Vitest watch mode
-npm run test:coverage  # coverage report (threshold: 70% on core files)
+pnpm dev            # Vite dev server → localhost:5173
+pnpm build          # tsc --noEmit + vite build (production)
+pnpm preview        # preview production build → localhost:4173
+pnpm lint           # ESLint — 0 warnings = CI gate
+pnpm lint:fix       # ESLint with auto-fix
+pnpm format         # Prettier format all files
+pnpm format:check   # Prettier check (CI gate)
+pnpm check          # tsc --noEmit
+pnpm test           # Vitest single pass
+pnpm test:watch     # Vitest watch mode
+pnpm test:coverage  # coverage report (thresholds: 80% lines/functions/statements, 75% branches)
 ```
 
 ## Key files
@@ -38,8 +38,6 @@ vite.config.ts                        Vite + Vitest config (base path, test setu
 ## Architecture
 
 - All source: `client/src/`
-- Shared TypeScript types: `shared/schema.ts` (reference only, not runtime)
-- `server/` is archived — Express backend, no longer used
 - Vite `base = /GazpachoScaler/` in production — required for GitHub Pages subpath routing
 - Tests mirror `src/` structure under `client/src/test/`
 
@@ -57,7 +55,7 @@ One worktree per feature branch, placed as siblings of the main checkout:
 
 ```bash
 git worktree add ../ws-<name> -b <branch-name> main
-cd ../ws-<name> && npm ci
+cd ../ws-<name> && pnpm install
 # ... work ...
 git worktree remove ../ws-<name>
 git branch -d <branch-name>

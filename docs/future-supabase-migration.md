@@ -58,7 +58,7 @@ VITE_SUPABASE_ANON_KEY=eyJhbGciOiJI...
 Install the Supabase JS client:
 
 ```bash
-npm install @supabase/supabase-js
+pnpm add @supabase/supabase-js
 ```
 
 Create `client/src/lib/supabase.ts`:

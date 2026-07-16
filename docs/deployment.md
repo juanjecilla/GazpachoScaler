@@ -11,8 +11,8 @@ Every push to `main` triggers the deploy workflow:
 ```
 git push origin main
   → .github/workflows/deploy.yml
-    → npm ci
-    → npm run build (NODE_ENV=production)
+    → pnpm install
+    → pnpm build (NODE_ENV=production)
     → upload dist/ as GitHub Pages artifact
     → deploy to github-pages environment
 ```
@@ -28,8 +28,8 @@ Updates are live within ~2 minutes of pushing.
 ## Local production preview
 
 ```bash
-npm run build    # produces dist/
-npm run preview  # serves at http://localhost:4173
+pnpm build    # produces dist/
+pnpm preview  # serves at http://localhost:4173
 ```
 
 ## Vite base path
@@ -49,9 +49,9 @@ const repoName = 'GazpachoScaler';
 
 `.github/workflows/ci.yml` runs on every push to `main` and `phase/**` branches:
 
-1. `npm run lint` — ESLint with 0 warnings policy
-2. `npm run format:check` — Prettier check
-3. `npm run check` — TypeScript type check
-4. `npm run test` — Vitest test suite
+1. `pnpm lint` — ESLint with 0 warnings policy
+2. `pnpm format:check` — Prettier check
+3. `pnpm check` — TypeScript type check
+4. `pnpm test` — Vitest test suite
 
 All four must pass before a PR can be merged to `main`.
