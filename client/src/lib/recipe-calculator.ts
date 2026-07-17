@@ -31,6 +31,15 @@ export const INGREDIENTS: Ingredient[] = [
   { key: 'jerezVinegar', icon: 'fas fa-wine-bottle', proportion: 0.018 },
 ];
 
+/**
+ * Estimate how many servings a given volume of gazpacho yields, assuming
+ * ~250mL per serving. Always rounds up — a partial serving still counts
+ * as a serving the batch can stretch to.
+ */
+export function estimateServings(totalVolumeLiters: number): number {
+  return Math.ceil(totalVolumeLiters * 4);
+}
+
 export class RecipeCalculator {
   private proportions: Record<string, number>;
   private mode: 'original' | 'custom';

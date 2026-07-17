@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { RecipeCalculator, ORIGINAL_PROPORTIONS } from '@/lib/recipe-calculator';
+import { RecipeCalculator, ORIGINAL_PROPORTIONS, estimateServings } from '@/lib/recipe-calculator';
 
 describe('RecipeCalculator', () => {
   let calc: RecipeCalculator;
@@ -127,6 +127,24 @@ describe('RecipeCalculator', () => {
     it('mode matches current mode', () => {
       calc.setMode('custom');
       expect(calc.exportRecipe().mode).toBe('custom');
+    });
+  });
+
+  describe('estimateServings', () => {
+    it('rounds up a fraction just over a serving boundary (1.01L -> 5)', () => {
+      expect(estimateServings(1.01)).toBe(5);
+    });
+
+    it('returns an exact multiple with no rounding (1.5L -> 6)', () => {
+      expect(estimateServings(1.5)).toBe(6);
+    });
+
+    it('returns 0 for 0L', () => {
+      expect(estimateServings(0)).toBe(0);
+    });
+
+    it('matches the default recipe volume (~1.47L -> 6)', () => {
+      expect(estimateServings(calc.calculateVolume())).toBe(6);
     });
   });
 });
