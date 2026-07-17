@@ -70,6 +70,12 @@ export class RecipeCalculator {
     return { ...this.proportions };
   }
 
+  /** Replace every proportion at once — used to restore a saved recipe snapshot. */
+  setProportions(proportions: Record<string, number>): Record<string, number> {
+    this.proportions = { ...proportions };
+    return { ...this.proportions };
+  }
+
   calculateVolume(): number {
     const totalWeight = Object.values(this.proportions).reduce((sum, weight) => sum + weight, 0);
     // Approximate density conversion (gazpacho is roughly 1.05 kg/L)
