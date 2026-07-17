@@ -60,6 +60,10 @@ export const translations = {
     pwa_update_available: 'A new version is available',
     pwa_update_reload: 'Reload',
     pwa_update_dismiss: 'Dismiss update notification',
+    export_text: 'Export as Text',
+    export_text_success: 'Recipe text exported successfully!',
+    share_text: 'Share Recipe Text',
+    recipe_text_copied: 'Recipe copied to clipboard!',
   },
   es: {
     subtitle:
@@ -122,6 +126,10 @@ export const translations = {
     pwa_update_available: 'Hay una nueva versión disponible',
     pwa_update_reload: 'Recargar',
     pwa_update_dismiss: 'Descartar notificación de actualización',
+    export_text: 'Exportar como Texto',
+    export_text_success: '¡Texto de la receta exportado exitosamente!',
+    share_text: 'Compartir Receta en Texto',
+    recipe_text_copied: '¡Receta copiada al portapapeles!',
   },
   fr: {
     subtitle:
@@ -184,6 +192,10 @@ export const translations = {
     pwa_update_available: 'Une nouvelle version est disponible',
     pwa_update_reload: 'Recharger',
     pwa_update_dismiss: 'Ignorer la notification de mise à jour',
+    export_text: 'Exporter en Texte',
+    export_text_success: 'Texte de la recette exporté avec succès!',
+    share_text: 'Partager la Recette en Texte',
+    recipe_text_copied: 'Recette copiée dans le presse-papiers!',
   },
   de: {
     subtitle:
@@ -246,6 +258,10 @@ export const translations = {
     pwa_update_available: 'Eine neue Version ist verfügbar',
     pwa_update_reload: 'Neu laden',
     pwa_update_dismiss: 'Aktualisierungshinweis ausblenden',
+    export_text: 'Als Text Exportieren',
+    export_text_success: 'Rezepttext erfolgreich exportiert!',
+    share_text: 'Rezept als Text Teilen',
+    recipe_text_copied: 'Rezept in die Zwischenablage kopiert!',
   },
 };
 

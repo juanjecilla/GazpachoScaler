@@ -13,8 +13,13 @@ const exportRecipe = () => ({
   exportDate: '2026-07-17T00:00:00.000Z',
 });
 
+const ingredients = { tomato: 1000, cucumber: 333.33 };
+const volume = 1.47;
+
 function renderPanel() {
-  return render(<ActionsPanel exportRecipe={exportRecipe} t={t} />);
+  return render(
+    <ActionsPanel exportRecipe={exportRecipe} ingredients={ingredients} volume={volume} t={t} />
+  );
 }
 
 describe('ActionsPanel', () => {
@@ -30,8 +35,10 @@ describe('ActionsPanel', () => {
   it('renders the export, copy, share and print buttons', () => {
     renderPanel();
     expect(screen.getByTestId('export-recipe-button')).toBeInTheDocument();
+    expect(screen.getByTestId('export-text-button')).toBeInTheDocument();
     expect(screen.getByTestId('copy-link-button')).toBeInTheDocument();
     expect(screen.getByTestId('share-social-button')).toBeInTheDocument();
+    expect(screen.getByTestId('share-text-button')).toBeInTheDocument();
     expect(screen.getByTestId('print-recipe-button')).toBeInTheDocument();
   });
 
@@ -75,6 +82,58 @@ describe('ActionsPanel', () => {
     await userEvent.click(screen.getByTestId('share-social-button'));
 
     expect(share).toHaveBeenCalledOnce();
+  });
+
+  it('exporting as text creates and revokes an object URL with a .txt filename', async () => {
+    const createObjectURL = vi.fn((_blob: Blob) => 'blob:mock-text');
+    const revokeObjectURL = vi.fn();
+    vi.stubGlobal('URL', { ...URL, createObjectURL, revokeObjectURL });
+    const clickSpy = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
+
+    renderPanel();
+    await userEvent.click(screen.getByTestId('export-text-button'));
+
+    expect(createObjectURL).toHaveBeenCalledOnce();
+    const blobArg = createObjectURL.mock.calls[0][0] as Blob;
+    expect(blobArg.type).toBe('text/plain');
+    expect(revokeObjectURL).toHaveBeenCalledWith('blob:mock-text');
+    clickSpy.mockRestore();
+  });
+
+  it('sharing as text uses the Web Share API with the formatted recipe text', async () => {
+    const share = vi.fn().mockResolvedValue(undefined);
+    Object.assign(navigator, { share });
+
+    renderPanel();
+    await userEvent.click(screen.getByTestId('share-text-button'));
+
+    expect(share).toHaveBeenCalledOnce();
+    const payload = share.mock.calls[0][0];
+    expect(payload.text).toContain('tomato: 1000 g');
+  });
+
+  it('sharing as text falls back to clipboard copy when the Web Share API is unavailable', async () => {
+    Object.assign(navigator, { share: undefined });
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.assign(navigator, { clipboard: { writeText } });
+
+    renderPanel();
+    await userEvent.click(screen.getByTestId('share-text-button'));
+
+    expect(writeText).toHaveBeenCalledOnce();
+    expect(writeText.mock.calls[0][0]).toContain('tomato: 1000 g');
+  });
+
+  it('sharing as text falls back to clipboard copy when the share call rejects', async () => {
+    const share = vi.fn().mockRejectedValue(new Error('cancelled'));
+    Object.assign(navigator, { share });
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.assign(navigator, { clipboard: { writeText } });
+
+    renderPanel();
+    await userEvent.click(screen.getByTestId('share-text-button'));
+
+    expect(writeText).toHaveBeenCalledOnce();
   });
 
   it('printing triggers window.print', async () => {

@@ -110,7 +110,12 @@ function HomeContent() {
 
           {/* Actions Panel */}
           <div className="space-y-6">
-            <ActionsPanel exportRecipe={exportRecipe} t={t} />
+            <ActionsPanel
+              exportRecipe={exportRecipe}
+              ingredients={ingredients}
+              volume={volume}
+              t={t}
+            />
             {mode === 'custom' && (
               <RatioPresetsPanel
                 currentProportions={ingredients}
