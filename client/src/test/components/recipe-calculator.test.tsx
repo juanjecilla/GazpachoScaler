@@ -39,6 +39,20 @@ describe('RecipeCalculator', () => {
     expect(screen.getByTestId('volume-display')).toHaveTextContent('1.47L');
   });
 
+  it('renders servings estimate derived from volume', () => {
+    render(<RecipeCalculator {...defaultProps} />);
+    expect(screen.getByTestId('servings-display')).toBeInTheDocument();
+    expect(screen.getByTestId('servings-display')).toHaveTextContent('6');
+  });
+
+  it('updates the servings estimate when volume changes', () => {
+    const { rerender } = render(<RecipeCalculator {...defaultProps} volume={1.01} />);
+    expect(screen.getByTestId('servings-display')).toHaveTextContent('5');
+
+    rerender(<RecipeCalculator {...defaultProps} volume={2.5} />);
+    expect(screen.getByTestId('servings-display')).toHaveTextContent('10');
+  });
+
   it('renders reset button', () => {
     render(<RecipeCalculator {...defaultProps} />);
     expect(screen.getByTestId('reset-recipe-button')).toBeInTheDocument();

@@ -2,7 +2,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Scale, RotateCcw } from 'lucide-react';
-import { INGREDIENTS } from '@/lib/recipe-calculator';
+import { INGREDIENTS, estimateServings } from '@/lib/recipe-calculator';
 import type { TFunction } from '@/lib/translations';
 
 interface RecipeCalculatorProps {
@@ -41,6 +41,17 @@ export function RecipeCalculator({
               data-testid="volume-display"
             >
               {volume.toFixed(2)}L
+            </span>
+          </div>
+          <div className="mt-2 flex items-center justify-between">
+            <span className="font-crimson text-sm text-ancient-600 dark:text-parchment-300">
+              {t('estimated_servings')}
+            </span>
+            <span
+              className="font-inter text-lg font-semibold text-parchment-600 dark:text-parchment-300"
+              data-testid="servings-display"
+            >
+              {estimateServings(volume)}
             </span>
           </div>
         </div>
