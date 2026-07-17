@@ -37,7 +37,8 @@ describe('ActionsPanel', () => {
 
   it('renders the community counter and tips', () => {
     renderPanel();
-    expect(screen.getByTestId('made-counter')).toHaveTextContent('2847');
+    // Grouping separator depends on the runtime locale/ICU data, so match loosely.
+    expect(screen.getByTestId('made-counter')).toHaveTextContent(/2[,.]?847/);
     expect(screen.getByTestId('made-it-button')).toBeInTheDocument();
     expect(screen.getByText('tip1')).toBeInTheDocument();
     expect(screen.getByText('tip4')).toBeInTheDocument();
@@ -93,7 +94,7 @@ describe('ActionsPanel', () => {
 
     await userEvent.click(button);
 
-    expect(screen.getByTestId('made-counter')).toHaveTextContent('2848');
+    expect(screen.getByTestId('made-counter')).toHaveTextContent(/2[,.]?848/);
     expect(screen.getByTestId('made-it-button')).toBeDisabled();
     expect(localStorage.getItem('gazpacho-user-made')).toBe('true');
   });
