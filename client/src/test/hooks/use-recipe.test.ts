@@ -47,6 +47,25 @@ describe('useRecipe', () => {
     expect(result.current.ingredients).toEqual(ORIGINAL_PROPORTIONS);
   });
 
+  it('loadRecipe restores exact amounts and mode', () => {
+    const { result } = renderHook(() => useRecipe());
+    const snapshot = {
+      tomato: 2500,
+      cucumber: 800,
+      greenPepper: 400,
+      garlic: 30,
+      oliveOil: 40,
+      salt: 15,
+      jerezVinegar: 45,
+    };
+    act(() => {
+      result.current.loadRecipe(snapshot, 'custom');
+    });
+    expect(result.current.ingredients).toEqual(snapshot);
+    expect(result.current.mode).toBe('custom');
+    expect(result.current.volume).toBeGreaterThan(0);
+  });
+
   it('exportRecipe returns correct shape', () => {
     const { result } = renderHook(() => useRecipe());
     const exported = result.current.exportRecipe();
