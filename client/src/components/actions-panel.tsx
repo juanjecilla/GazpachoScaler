@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { useCounter } from '@/hooks/use-counter';
+import type { TFunction } from '@/lib/translations';
 import {
   Share2,
   Download,
@@ -24,7 +25,7 @@ interface RecipeExport {
 
 interface ActionsPanelProps {
   exportRecipe: () => RecipeExport;
-  t: (key: string) => string;
+  t: TFunction;
 }
 
 export function ActionsPanel({ exportRecipe, t }: ActionsPanelProps) {
@@ -211,7 +212,7 @@ export function ActionsPanel({ exportRecipe, t }: ActionsPanelProps) {
           </CardTitle>
         </CardHeader>
         <CardContent className="font-inter space-y-3 text-sm text-ancient-600 dark:text-parchment-300">
-          {['tip1', 'tip2', 'tip3', 'tip4'].map((tip) => (
+          {(['tip1', 'tip2', 'tip3', 'tip4'] as const).map((tip) => (
             <div key={tip} className="flex items-start gap-2">
               <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-parchment-500" />
               <p>{t(tip)}</p>

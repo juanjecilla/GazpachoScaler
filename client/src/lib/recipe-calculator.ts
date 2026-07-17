@@ -1,5 +1,12 @@
+/**
+ * Ingredient identifiers. These double as translation keys, so every value
+ * here must exist in `translations` (see `TranslationKey`).
+ */
+export type IngredientKey =
+  'tomato' | 'cucumber' | 'greenPepper' | 'garlic' | 'oliveOil' | 'salt' | 'jerezVinegar';
+
 export interface Ingredient {
-  key: string;
+  key: IngredientKey;
   icon: string;
   proportion: number;
 }

@@ -9,11 +9,11 @@ export const translations = {
     estimated_volume: 'Estimated Volume:',
     tomato: 'Tomato',
     cucumber: 'Cucumber',
-    green_pepper: 'Green Pepper',
+    greenPepper: 'Green Pepper',
     garlic: 'Garlic',
-    olive_oil: 'AOVE (Extra Virgin Olive Oil)',
+    oliveOil: 'AOVE (Extra Virgin Olive Oil)',
     salt: 'Salt',
-    jerez_vinegar: 'Jerez Vinegar',
+    jerezVinegar: 'Jerez Vinegar',
     reset_recipe: 'Reset to Original',
     share_export: 'Share & Export',
     export_recipe: 'Export Recipe',
@@ -47,11 +47,11 @@ export const translations = {
     estimated_volume: 'Volumen Estimado:',
     tomato: 'Tomate',
     cucumber: 'Pepino',
-    green_pepper: 'Pimiento Verde',
+    greenPepper: 'Pimiento Verde',
     garlic: 'Ajo',
-    olive_oil: 'AOVE (Aceite de Oliva Virgen Extra)',
+    oliveOil: 'AOVE (Aceite de Oliva Virgen Extra)',
     salt: 'Sal',
-    jerez_vinegar: 'Vinagre de Jerez',
+    jerezVinegar: 'Vinagre de Jerez',
     reset_recipe: 'Restaurar Original',
     share_export: 'Compartir y Exportar',
     export_recipe: 'Exportar Receta',
@@ -85,11 +85,11 @@ export const translations = {
     estimated_volume: 'Volume Estimé:',
     tomato: 'Tomate',
     cucumber: 'Concombre',
-    green_pepper: 'Poivron Vert',
+    greenPepper: 'Poivron Vert',
     garlic: 'Ail',
-    olive_oil: "AOVE (Huile d'Olive Vierge Extra)",
+    oliveOil: "AOVE (Huile d'Olive Vierge Extra)",
     salt: 'Sel',
-    jerez_vinegar: 'Vinaigre de Jerez',
+    jerezVinegar: 'Vinaigre de Jerez',
     reset_recipe: "Restaurer l'Original",
     share_export: 'Partager et Exporter',
     export_recipe: 'Exporter la Recette',
@@ -123,11 +123,11 @@ export const translations = {
     estimated_volume: 'Geschätztes Volumen:',
     tomato: 'Tomate',
     cucumber: 'Gurke',
-    green_pepper: 'Grüne Paprika',
+    greenPepper: 'Grüne Paprika',
     garlic: 'Knoblauch',
-    olive_oil: 'AOVE (Natives Olivenöl Extra)',
+    oliveOil: 'AOVE (Natives Olivenöl Extra)',
     salt: 'Salz',
-    jerez_vinegar: 'Jerez Essig',
+    jerezVinegar: 'Jerez Essig',
     reset_recipe: 'Auf Original Zurücksetzen',
     share_export: 'Teilen & Exportieren',
     export_recipe: 'Rezept Exportieren',
@@ -154,4 +154,13 @@ export const translations = {
 };
 
 export type Language = keyof typeof translations;
+
+/**
+ * Union of every valid translation key, derived from the English table.
+ * Passing a key outside this union to `t()` (or any `TFunction`) is a
+ * compile-time error, so unknown/mistyped keys can never reach runtime.
+ */
 export type TranslationKey = keyof typeof translations.en;
+
+/** Signature shared by every translate helper passed through the component tree. */
+export type TFunction = (key: TranslationKey) => string;

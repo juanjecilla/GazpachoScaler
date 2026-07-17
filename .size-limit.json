@@ -1,0 +1,9 @@
+[
+  {
+    "name": "main dist JS (raw)",
+    "path": "dist/assets/index-*.js",
+    "limit": "320 KB",
+    "gzip": false,
+    "brotli": false
+  }
+]

@@ -20,15 +20,22 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
+const VALID_THEMES: readonly Theme[] = ['dark', 'light', 'system'];
+
+function isTheme(value: string | null): value is Theme {
+  return value !== null && (VALID_THEMES as readonly string[]).includes(value);
+}
+
 export function ThemeProvider({
   children,
   defaultTheme = 'system',
   storageKey = 'gazpacho-theme',
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    const stored = localStorage.getItem(storageKey);
+    return isTheme(stored) ? stored : defaultTheme;
+  });
 
   useEffect(() => {
     const root = window.document.documentElement;

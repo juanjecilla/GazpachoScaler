@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Scale, RotateCcw } from 'lucide-react';
 import { INGREDIENTS } from '@/lib/recipe-calculator';
+import type { TFunction } from '@/lib/translations';
 
 interface RecipeCalculatorProps {
   ingredients: Record<string, number>;
@@ -10,7 +11,7 @@ interface RecipeCalculatorProps {
   onIngredientChange: (ingredient: string, value: number) => void;
   onReset: () => void;
   getProportionLabel: (ingredient: string) => string;
-  t: (key: string) => string;
+  t: TFunction;
 }
 
 export function RecipeCalculator({
