@@ -5,6 +5,7 @@ import { RecipeModeSelector } from '@/components/recipe-mode-selector';
 import { RecipeCalculator } from '@/components/recipe-calculator';
 import { ActionsPanel } from '@/components/actions-panel';
 import { RecipeHistoryPanel } from '@/components/recipe-history-panel';
+import { RatioPresetsPanel } from '@/components/ratio-presets-panel';
 import { useRecipe } from '@/hooks/use-recipe';
 import { Button } from '@/components/ui/button';
 import { translations, type Language, type TranslationKey } from '@/lib/translations';
@@ -109,6 +110,13 @@ function HomeContent() {
           {/* Actions Panel */}
           <div className="space-y-6">
             <ActionsPanel exportRecipe={exportRecipe} t={t} />
+            {mode === 'custom' && (
+              <RatioPresetsPanel
+                currentProportions={ingredients}
+                onLoad={(proportions) => loadRecipe(proportions, 'custom')}
+                t={t}
+              />
+            )}
             <RecipeHistoryPanel
               currentMode={mode}
               currentIngredients={ingredients}
