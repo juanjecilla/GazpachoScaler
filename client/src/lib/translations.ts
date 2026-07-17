@@ -56,6 +56,9 @@ export const translations = {
     default_preset_name: "Juanje's Original",
     preset_saved: 'Preset saved!',
     preset_loaded: 'Preset loaded!',
+    pwa_update_available: 'A new version is available',
+    pwa_update_reload: 'Reload',
+    pwa_update_dismiss: 'Dismiss update notification',
   },
   es: {
     subtitle:
@@ -114,6 +117,9 @@ export const translations = {
     default_preset_name: 'Original de Juanje',
     preset_saved: '¡Proporción guardada!',
     preset_loaded: '¡Proporción cargada!',
+    pwa_update_available: 'Hay una nueva versión disponible',
+    pwa_update_reload: 'Recargar',
+    pwa_update_dismiss: 'Descartar notificación de actualización',
   },
   fr: {
     subtitle:
@@ -172,6 +178,9 @@ export const translations = {
     default_preset_name: 'Original de Juanje',
     preset_saved: 'Proportion enregistrée !',
     preset_loaded: 'Proportion chargée !',
+    pwa_update_available: 'Une nouvelle version est disponible',
+    pwa_update_reload: 'Recharger',
+    pwa_update_dismiss: 'Ignorer la notification de mise à jour',
   },
   de: {
     subtitle:
@@ -230,6 +239,9 @@ export const translations = {
     default_preset_name: 'Juanjes Original',
     preset_saved: 'Proportion gespeichert!',
     preset_loaded: 'Proportion geladen!',
+    pwa_update_available: 'Eine neue Version ist verfügbar',
+    pwa_update_reload: 'Neu laden',
+    pwa_update_dismiss: 'Aktualisierungshinweis ausblenden',
   },
 };
 
