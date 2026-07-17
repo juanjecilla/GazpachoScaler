@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { useCounter } from '@/hooks/use-counter';
 import type { TFunction } from '@/lib/translations';
+import { RECIPE_TITLE, buildRecipeText } from '@/lib/text-export';
 import {
   Share2,
   Download,
@@ -13,6 +14,7 @@ import {
   CheckCircle,
   Lightbulb,
   Printer,
+  FileText,
 } from 'lucide-react';
 
 interface RecipeExport {
@@ -25,10 +27,12 @@ interface RecipeExport {
 
 interface ActionsPanelProps {
   exportRecipe: () => RecipeExport;
+  ingredients: Record<string, number>;
+  volume: number;
   t: TFunction;
 }
 
-export function ActionsPanel({ exportRecipe, t }: ActionsPanelProps) {
+export function ActionsPanel({ exportRecipe, ingredients, volume, t }: ActionsPanelProps) {
   const { toast } = useToast();
   const { count, increment, hasMade } = useCounter();
 
@@ -56,6 +60,63 @@ export function ActionsPanel({ exportRecipe, t }: ActionsPanelProps) {
         variant: 'destructive',
       });
     }
+  };
+
+  const handleExportText = () => {
+    try {
+      const content = buildRecipeText({ ingredients, volume }, t);
+      const dataBlob = new Blob([content], { type: 'text/plain' });
+
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'juanje-gazpacho-recipe.txt';
+      link.click();
+      URL.revokeObjectURL(url);
+
+      toast({
+        title: t('export_text_success'),
+        description: '',
+      });
+    } catch (_error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to export recipe text',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleCopyRecipeText = async () => {
+    try {
+      const text = buildRecipeText({ ingredients, volume }, t);
+      await navigator.clipboard.writeText(text);
+      toast({
+        title: t('recipe_text_copied'),
+        description: '',
+      });
+    } catch (_error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to copy recipe text',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleShareText = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: RECIPE_TITLE,
+          text: buildRecipeText({ ingredients, volume }, t),
+        });
+        return;
+      } catch (_error) {
+        // Share was cancelled or failed — fall back to clipboard below.
+      }
+    }
+    await handleCopyRecipeText();
   };
 
   const handleCopyLink = async () => {
@@ -131,6 +192,15 @@ export function ActionsPanel({ exportRecipe, t }: ActionsPanelProps) {
             {t('export_recipe')}
           </Button>
           <Button
+            onClick={handleExportText}
+            variant="outline"
+            className="w-full transform border border-parchment-300 bg-parchment-200 text-ancient-700 shadow-md transition-all duration-200 hover:scale-105 hover:shadow-lg dark:border-ancient-600 dark:bg-ancient-700 dark:text-parchment-200"
+            data-testid="export-text-button"
+          >
+            <FileText className="mr-2 h-4 w-4" />
+            {t('export_text')}
+          </Button>
+          <Button
             onClick={handleCopyLink}
             variant="outline"
             className="w-full transform border border-parchment-300 bg-parchment-200 text-ancient-700 shadow-md transition-all duration-200 hover:scale-105 hover:shadow-lg dark:border-ancient-600 dark:bg-ancient-700 dark:text-parchment-200"
@@ -147,6 +217,15 @@ export function ActionsPanel({ exportRecipe, t }: ActionsPanelProps) {
           >
             <Share className="mr-2 h-4 w-4" />
             {t('share_social')}
+          </Button>
+          <Button
+            onClick={handleShareText}
+            variant="outline"
+            className="w-full transform border border-parchment-300 bg-parchment-200 text-ancient-700 shadow-md transition-all duration-200 hover:scale-105 hover:shadow-lg dark:border-ancient-600 dark:bg-ancient-700 dark:text-parchment-200"
+            data-testid="share-text-button"
+          >
+            <Share2 className="mr-2 h-4 w-4" />
+            {t('share_text')}
           </Button>
           <Button
             onClick={() => window.print()}
