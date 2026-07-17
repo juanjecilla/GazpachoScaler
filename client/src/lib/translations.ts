@@ -48,6 +48,14 @@ export const translations = {
     favorites: 'Favorites',
     recipe_saved: 'Recipe saved!',
     recipe_loaded: 'Recipe loaded!',
+    ratio_presets: 'Ratio Presets',
+    save_preset: 'Save Preset',
+    preset_name: 'Preset name',
+    load_preset: 'Load',
+    delete_preset: 'Delete',
+    default_preset_name: "Juanje's Original",
+    preset_saved: 'Preset saved!',
+    preset_loaded: 'Preset loaded!',
   },
   es: {
     subtitle:
@@ -98,6 +106,14 @@ export const translations = {
     favorites: 'Favoritos',
     recipe_saved: '¡Receta guardada!',
     recipe_loaded: '¡Receta cargada!',
+    ratio_presets: 'Proporciones Guardadas',
+    save_preset: 'Guardar Proporción',
+    preset_name: 'Nombre de la proporción',
+    load_preset: 'Cargar',
+    delete_preset: 'Eliminar',
+    default_preset_name: 'Original de Juanje',
+    preset_saved: '¡Proporción guardada!',
+    preset_loaded: '¡Proporción cargada!',
   },
   fr: {
     subtitle:
@@ -148,6 +164,14 @@ export const translations = {
     favorites: 'Favoris',
     recipe_saved: 'Recette enregistrée !',
     recipe_loaded: 'Recette chargée !',
+    ratio_presets: 'Proportions Enregistrées',
+    save_preset: 'Enregistrer la Proportion',
+    preset_name: 'Nom de la proportion',
+    load_preset: 'Charger',
+    delete_preset: 'Supprimer',
+    default_preset_name: 'Original de Juanje',
+    preset_saved: 'Proportion enregistrée !',
+    preset_loaded: 'Proportion chargée !',
   },
   de: {
     subtitle:
@@ -198,6 +222,14 @@ export const translations = {
     favorites: 'Favoriten',
     recipe_saved: 'Rezept gespeichert!',
     recipe_loaded: 'Rezept geladen!',
+    ratio_presets: 'Gespeicherte Proportionen',
+    save_preset: 'Proportion Speichern',
+    preset_name: 'Name der Proportion',
+    load_preset: 'Laden',
+    delete_preset: 'Löschen',
+    default_preset_name: 'Juanjes Original',
+    preset_saved: 'Proportion gespeichert!',
+    preset_loaded: 'Proportion geladen!',
   },
 };
 
