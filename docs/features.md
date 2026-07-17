@@ -9,15 +9,16 @@ The core feature. Enter any ingredient weight and GazpachoScaler recalculates th
 Change one ingredient → all others scale proportionally based on traditional ratios.
 
 Base recipe (1 serving ~1.5L):
-| Ingredient | Amount | Ratio |
-|---|---|---|
-| Tomato | 1000g | Base |
-| Cucumber | 333g | 1/3 |
-| Green pepper | 167g | 1/6 |
-| Garlic | 12g | 1.2% |
-| Olive oil | 15g | 1.5% |
-| Salt | 6g | 0.6% |
-| Jerez vinegar | 18g | 1.8% |
+
+| Ingredient    | Amount | Ratio |
+| ------------- | ------ | ----- |
+| Tomato        | 1000g  | Base  |
+| Cucumber      | 333g   | 1/3   |
+| Green pepper  | 167g   | 1/6   |
+| Garlic        | 12g    | 1.2%  |
+| Olive oil     | 15g    | 1.5%  |
+| Salt          | 6g     | 0.6%  |
+| Jerez vinegar | 18g    | 1.8%  |
 
 ### Custom mode
 

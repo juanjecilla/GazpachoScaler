@@ -10,8 +10,8 @@
 ```bash
 git clone git@github.com:juanjecilla/GazpachoScaler.git
 cd GazpachoScaler
-npm ci
-npm run dev   # → http://localhost:5173
+pnpm install
+pnpm dev   # → http://localhost:5173
 ```
 
 ## Git workflow: worktrees
@@ -23,8 +23,8 @@ Each feature or phase gets its own branch and worktree so you can work on multip
 git worktree add ../ws-my-feature -b feature/my-feature main
 
 cd ../ws-my-feature
-npm ci         # each worktree needs its own node_modules
-npm run dev
+ppnpm add         # each worktree needs its own node_modules
+pnpm dev
 
 # After merging, clean up
 git worktree remove ../ws-my-feature
@@ -78,9 +78,9 @@ Keep subject ≤50 chars. Use the body for "why" when the reason isn't obvious.
 ## Running tests
 
 ```bash
-npm run test           # single pass
-npm run test:watch     # watch mode
-npm run test:coverage  # coverage report
+pnpm test           # single pass
+pnpm test:watch     # watch mode
+pnpm test:coverage  # coverage report
 ```
 
 Tests live in `client/src/test/` mirroring the `src/` structure.

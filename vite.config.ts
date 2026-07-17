@@ -9,7 +9,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(import.meta.dirname, 'client', 'src'),
-      '@shared': path.resolve(import.meta.dirname, 'shared'),
     },
   },
   root: path.resolve(import.meta.dirname, 'client'),
@@ -41,7 +40,7 @@ export default defineConfig({
         'src/lib/queryClient.ts',
         'src/lib/translations.ts',
       ],
-      thresholds: { lines: 70, functions: 70 },
+      thresholds: { lines: 80, branches: 75, functions: 80, statements: 80 },
     },
   },
 });

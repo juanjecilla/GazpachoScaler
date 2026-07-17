@@ -37,10 +37,12 @@ export function ActionsPanel({ exportRecipe, t }: ActionsPanelProps) {
       const dataStr = JSON.stringify(recipeData, null, 2);
       const dataBlob = new Blob([dataStr], { type: 'application/json' });
 
+      const url = URL.createObjectURL(dataBlob);
       const link = document.createElement('a');
-      link.href = URL.createObjectURL(dataBlob);
+      link.href = url;
       link.download = 'juanje-gazpacho-recipe.json';
       link.click();
+      URL.revokeObjectURL(url);
 
       toast({
         title: t('export_success'),
