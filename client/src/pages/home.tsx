@@ -6,6 +6,7 @@ import { RecipeCalculator } from '@/components/recipe-calculator';
 import { ActionsPanel } from '@/components/actions-panel';
 import { RecipeHistoryPanel } from '@/components/recipe-history-panel';
 import { RatioPresetsPanel } from '@/components/ratio-presets-panel';
+import { PwaUpdatePrompt } from '@/components/pwa-update-prompt';
 import { useRecipe } from '@/hooks/use-recipe';
 import { Button } from '@/components/ui/button';
 import { translations, type Language, type TranslationKey } from '@/lib/translations';
@@ -126,6 +127,9 @@ function HomeContent() {
           </div>
         </div>
       </main>
+
+      {/* Service worker only exists in production builds — never mount in dev */}
+      {import.meta.env.PROD && <PwaUpdatePrompt t={t} />}
     </div>
   );
 }
