@@ -4,3 +4,8 @@ coverage
 .DS_Store
 vite.config.ts.*
 *.tar.gz
+
+# Playwright
+playwright-report
+test-results
+/playwright/.cache
