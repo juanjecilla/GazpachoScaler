@@ -41,6 +41,36 @@ describe('useCounter', () => {
     expect(result.current.count).toBe(3000);
   });
 
+  it('falls back to default when stored value is non-numeric (corrupt)', () => {
+    localStorage.setItem('gazpacho-counter', 'not-a-number');
+    const { result } = renderHook(() => useCounter());
+    expect(result.current.count).toBe(2847);
+  });
+
+  it('falls back to default when stored value is a wrong-shape JSON blob', () => {
+    localStorage.setItem('gazpacho-counter', '{"count":5}');
+    const { result } = renderHook(() => useCounter());
+    expect(result.current.count).toBe(2847);
+  });
+
+  it('falls back to default when stored value is negative', () => {
+    localStorage.setItem('gazpacho-counter', '-42');
+    const { result } = renderHook(() => useCounter());
+    expect(result.current.count).toBe(2847);
+  });
+
+  it('falls back to default when stored value is empty string', () => {
+    localStorage.setItem('gazpacho-counter', '');
+    const { result } = renderHook(() => useCounter());
+    expect(result.current.count).toBe(2847);
+  });
+
+  it('parses a leading-integer value (e.g. "3000abc") to its numeric prefix', () => {
+    localStorage.setItem('gazpacho-counter', '3000abc');
+    const { result } = renderHook(() => useCounter());
+    expect(result.current.count).toBe(3000);
+  });
+
   it('hasMade is false initially', () => {
     const { result } = renderHook(() => useCounter());
     expect(result.current.hasMade).toBe(false);

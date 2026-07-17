@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Settings, Scroll, Edit } from 'lucide-react';
+import type { TFunction } from '@/lib/translations';
 
 interface RecipeModeSelectorProps {
   mode: 'original' | 'custom';
   onModeChange: (mode: 'original' | 'custom') => void;
-  t: (key: string) => string;
+  t: TFunction;
 }
 
 export function RecipeModeSelector({ mode, onModeChange, t }: RecipeModeSelectorProps) {

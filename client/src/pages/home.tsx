@@ -6,7 +6,7 @@ import { RecipeCalculator } from '@/components/recipe-calculator';
 import { ActionsPanel } from '@/components/actions-panel';
 import { useRecipe } from '@/hooks/use-recipe';
 import { Button } from '@/components/ui/button';
-import { translations, type Language } from '@/lib/translations';
+import { translations, type Language, type TranslationKey } from '@/lib/translations';
 import { Sun, Moon } from 'lucide-react';
 
 function ThemeToggle() {
@@ -47,8 +47,8 @@ function HomeContent() {
   } = useRecipe();
 
   const t = useCallback(
-    (key: string): string => {
-      return translations[currentLanguage]?.[key as keyof typeof translations.en] || key;
+    (key: TranslationKey): string => {
+      return translations[currentLanguage]?.[key] || key;
     },
     [currentLanguage]
   );

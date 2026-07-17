@@ -28,12 +28,9 @@ export default defineConfig({
       include: ['src/**'],
       exclude: [
         'src/components/ui/**',
-        'src/components/actions-panel.tsx',
-        'src/components/language-selector.tsx',
         'src/components/theme-provider.tsx',
         'src/test/**',
         'src/hooks/use-toast.ts',
-        'src/pages/**',
         'src/App.tsx',
         'src/main.tsx',
         'src/lib/translations.ts',
