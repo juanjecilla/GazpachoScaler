@@ -4,6 +4,7 @@ import { LanguageSelector } from '@/components/language-selector';
 import { RecipeModeSelector } from '@/components/recipe-mode-selector';
 import { RecipeCalculator } from '@/components/recipe-calculator';
 import { ActionsPanel } from '@/components/actions-panel';
+import { RecipeHistoryPanel } from '@/components/recipe-history-panel';
 import { useRecipe } from '@/hooks/use-recipe';
 import { Button } from '@/components/ui/button';
 import { translations, type Language, type TranslationKey } from '@/lib/translations';
@@ -42,6 +43,7 @@ function HomeContent() {
     updateIngredient,
     switchMode,
     resetToOriginal,
+    loadRecipe,
     exportRecipe,
     getProportionLabel,
   } = useRecipe();
@@ -105,8 +107,14 @@ function HomeContent() {
           </div>
 
           {/* Actions Panel */}
-          <div>
+          <div className="space-y-6">
             <ActionsPanel exportRecipe={exportRecipe} t={t} />
+            <RecipeHistoryPanel
+              currentMode={mode}
+              currentIngredients={ingredients}
+              onLoad={(recipe) => loadRecipe(recipe.ingredients, recipe.mode)}
+              t={t}
+            />
           </div>
         </div>
       </main>
