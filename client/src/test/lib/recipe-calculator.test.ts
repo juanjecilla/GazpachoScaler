@@ -53,6 +53,30 @@ describe('RecipeCalculator', () => {
     });
   });
 
+  describe('setProportions', () => {
+    it('replaces every proportion with the given snapshot', () => {
+      const snapshot = {
+        tomato: 2000,
+        cucumber: 666.66,
+        greenPepper: 333.34,
+        garlic: 24,
+        oliveOil: 30,
+        salt: 12,
+        jerezVinegar: 36,
+      };
+      const result = calc.setProportions(snapshot);
+      expect(result).toEqual(snapshot);
+      expect(calc.getProportions()).toEqual(snapshot);
+    });
+
+    it('returns a copy, not the caller reference', () => {
+      const snapshot = { ...ORIGINAL_PROPORTIONS, tomato: 5000 };
+      const result = calc.setProportions(snapshot);
+      result.tomato = 9999;
+      expect(calc.getProportions().tomato).toBe(5000);
+    });
+  });
+
   describe('calculateVolume', () => {
     it('returns ~1.47L for the default recipe', () => {
       expect(calc.calculateVolume()).toBeCloseTo(1.47, 1);

@@ -30,6 +30,17 @@ export function useRecipe() {
     setVolume(calculator.calculateVolume());
   }, [calculator]);
 
+  const loadRecipe = useCallback(
+    (newIngredients: Record<string, number>, newMode: 'original' | 'custom') => {
+      calculator.setMode(newMode);
+      const restored = calculator.setProportions(newIngredients);
+      setMode(newMode);
+      setIngredients(restored);
+      setVolume(calculator.calculateVolume());
+    },
+    [calculator]
+  );
+
   const exportRecipe = useCallback(() => {
     return calculator.exportRecipe();
   }, [calculator]);
@@ -52,6 +63,7 @@ export function useRecipe() {
     updateIngredient,
     switchMode,
     resetToOriginal,
+    loadRecipe,
     exportRecipe,
     getProportionLabel,
   };
